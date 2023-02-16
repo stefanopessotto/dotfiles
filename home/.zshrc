@@ -7,6 +7,7 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export PATH="$PATH:/home/peska/.local/share/bob/nvim-bin"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -36,8 +37,11 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='nvim'
 fi
+
+source "$CARGO_HOME/env"
+source "/home/peska/.local/share/ghcup/env" # ghcup-env
 
 alias ls='ls --color=auto'
 alias ll='ls -alF'
