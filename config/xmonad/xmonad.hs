@@ -12,6 +12,8 @@ import Graphics.X11.ExtraTypes.XF86 (xF86XK_AudioRaiseVolume,xF86XK_AudioLowerVo
 import XMonad.Actions.Volume
 import XMonad.Util.Brightness
 import XMonad.Hooks.WallpaperSetter
+import XMonad.Hooks.ManageHelpers
+import XMonad.StackSet (RationalRect (..))
 
 myXmobarPP :: PP
 myXmobarPP = def
@@ -31,6 +33,7 @@ myLayout = tiled ||| threeCol ||| mirrorT ||| Grid ||| Full
      nmaster  = 1
      delta    = 3/100
      ratio    = 1/2
+
 myKeys :: [((KeyMask, KeySym), X ())]
 myKeys =
    [ ((mod4Mask .|. shiftMask, xK_f), spawn "firefox")
@@ -46,6 +49,9 @@ myKeys =
    , ((0, xF86XK_MonBrightnessDown), decrease >> return())
    , ((0, xK_Print), spawn "spectacle")
    ]
+
+myManageHook = composeOne
+  [ className =? "SpeedCrunch" -?> doRectFloat $ RationalRect 0.3 0.3 0.4 0.4]
 
 myStartupHook :: X ()
 myStartupHook = do
@@ -63,6 +69,7 @@ myConfig = def
    { modMask            = mod4Mask
    , workspaces         = myWorkspaces 
    , layoutHook         = myLayout
+   , manageHook         = myManageHook
    , borderWidth        = 2
    , terminal           = "kitty"
    , normalBorderColor  = "#000000"
