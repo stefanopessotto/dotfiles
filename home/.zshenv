@@ -17,11 +17,14 @@ export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export JULIA_DEPOT_PATH="$XDG_DATA_HOME/julia"
 
 export MZN_SOLVER_PATH="$XDG_DATA_HOME/minizinc"
-export PATH="$PATH:/home/peska/.local/bin"
 export HELIX_RUNTIME="$XDG_CONFIG_HOME/helix/runtime"
-
+export PATH="$PATH:/home/peska/.local/bin"
+export PATH="$PATH:/home/peska/.cabal/bin"
 #slow startup of zsh
 skip_global_compinit=1
 
 #ghidra gray screen
 export _JAVA_AWT_WM_NONREPARENTING=1
+
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib:/usr/local/lib"
+. "/home/peska/.local/share/cargo/env"

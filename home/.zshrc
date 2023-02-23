@@ -55,6 +55,8 @@ alias pwninit='pwninit --template-path ~/.config/pwninit-template.py --template-
 alias python="python3"
 alias pluto="julia -e \"import Pluto; Pluto.run()\""
 
+alias morning="wol f0:79:59:8e:46:2f"
+
 [[ -s /home/peska/.autojump/etc/profile.d/autojump.sh ]] && source /home/peska/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
