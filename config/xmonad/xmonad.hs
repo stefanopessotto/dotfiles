@@ -52,8 +52,8 @@ myKeys =
     ((0, xF86XK_AudioRaiseVolume), raiseVolume 2 >> return ()),
     ((0, xF86XK_AudioLowerVolume), lowerVolume 2 >> return ()),
     ((0, xF86XK_AudioMute), toggleMute >> return ()),
-    ((0, xF86XK_MonBrightnessUp), spawn "light -A 10"),
-    ((0, xF86XK_MonBrightnessDown), spawn "light -U 10"),
+    ((0, xF86XK_MonBrightnessUp), spawn "light -A 5"),
+    ((0, xF86XK_MonBrightnessDown), spawn "light -U 5"),
     ((0, xF86XK_AudioMicMute), spawn "pactl set-source-mute 0 toggle"),
     ((0, xK_Print), spawn "spectacle")
   ]
