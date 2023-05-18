@@ -94,7 +94,11 @@ Config {
                "-D", "amdgpu_bl0"
                  ] 10
     , Run UnsafeXMonadLog
-    , Run Com "sh" ["-c", "~/.config/scripts/mic.sh"] "mic" 10
+    , Run Com "/usr/local/bin/mic.sh" [ 
+                "--on=\xf130", 
+                "--off=\xf131", 
+                "--t=<action=`pactl set-source-mute 0 toggle` button=1><status></action>"
+                ] "mic" 10
         ]
    }
 
