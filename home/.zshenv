@@ -19,9 +19,9 @@ export JULIA_DEPOT_PATH="$XDG_DATA_HOME/julia"
 
 export MZN_SOLVER_PATH="$XDG_DATA_HOME/minizinc"
 export HELIX_RUNTIME="$XDG_CONFIG_HOME/helix/runtime"
-export PATH="$PATH:/home/peska/.local/bin"
-export PATH="$PATH:/home/peska/.cabal/bin"
-export PATH="$PATH:/home/peska/.local/share/gem/ruby/3.0.0/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.cabal/bin"
+export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 #slow startup of zsh
 skip_global_compinit=1
 
