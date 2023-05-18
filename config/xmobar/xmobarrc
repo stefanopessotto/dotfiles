@@ -7,11 +7,11 @@ Config {
    , position =     Top
    , border =       BottomB
    , borderColor =  "#bcbcbc"
-
+   , iconRoot =     ".config/xmobar/icons"
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%UnsafeXMonadLog% %multicpu% @ %multicoretemp% | %memory% | %dynnetwork% }%time%{ %date% | %bright% | %mic% | %default:Master% | %battery% "
+   , template = "%UnsafeXMonadLog% %multicpu% @ %multicoretemp% | %memory% | %wlan0wi% @ %dynnetwork% }%time%{ %date% | %bright% | %mic% | %default:Master% | %battery% "
 
    -- general behavior
    , lowerOnStart =     False -- send to bottom of window stack on start
@@ -24,6 +24,10 @@ Config {
 
         -- network activity monitor (dynamic interface resolution)
         [
+        Run Wireless "wlan0" [ "-t", "<qualityipat> <essid>"
+                             , "--"
+                             , "--quality-icon-pattern", "<icon=wifi/%%.xpm/>"
+                             ] 10,
     	Run DynNetwork     [ "--template" , "<action=`kitty nmtui` button=1><tx>kB/s \xf01da<rx>kB/s \xf0552</action>"
                              , "--Low"      , "1000"       -- units: B/s
                              , "--High"     , "5000"       -- units: B/s
@@ -60,20 +64,17 @@ Config {
                              ] 10
 
         -- battery monitor
-        , Run Battery        [ "--template" , "<action=tlpui button=1><acstatus></action>"
+        , Run Battery        [ "--template" , "<action=tlpui button=1><acstatus><leftipat></action>"
                              , "--Low"      , "20"        -- units: %
                              , "--High"     , "80"        -- units: %
                              , "--low"      , "darkred"
-                             -- , "--normal"   , "darkorange"
-                             -- , "--high"     , "darkgreen"
 
-                             , "--" -- battery specific options
-                                       -- discharging status
-                                       , "-o"    , "<left>% \xf007f"
-                                       -- AC "on" status
-                                       , "-O"    , "<left>% \xf0088"
-                                       -- charged status
-                                       , "-i"    , "\xf0084"
+                             , "--"
+                             ,"--off-icon-pattern", "<icon=battery/%%.xpm/>"
+                             , "--on-icon-pattern", "<icon=battery-ac/%%.xpm/>"
+                             , "-o"    , "<left>%"
+                             , "-O"    , "<left>%"
+                             , "-i"    , "\xf0084"
                              ] 50
 
         -- time and date indicator 
@@ -94,7 +95,7 @@ Config {
                "-D", "amdgpu_bl0"
                  ] 10
     , Run UnsafeXMonadLog
-    , Run Com "/usr/local/bin/mic.sh" [ 
+    , Run Com ".config/xmobar/scripts/mic.sh" [ 
                 "--on=\xf130", 
                 "--off=\xf131", 
                 "--t=<action=`pactl set-source-mute 0 toggle` button=1><status></action>"
