@@ -1,4 +1,4 @@
-import Graphics.X11.ExtraTypes.XF86 (xF86XK_AudioLowerVolume, xF86XK_AudioMute, xF86XK_AudioRaiseVolume, xF86XK_MonBrightnessDown, xF86XK_MonBrightnessUp)
+import Graphics.X11.ExtraTypes.XF86 (xF86XK_AudioLowerVolume, xF86XK_AudioMicMute, xF86XK_AudioMute, xF86XK_AudioRaiseVolume, xF86XK_MonBrightnessDown, xF86XK_MonBrightnessUp)
 import XMonad
 import XMonad.Actions.Volume
 import XMonad.Hooks.EwmhDesktops
@@ -9,21 +9,23 @@ import XMonad.Hooks.WallpaperSetter
 import XMonad.Layout.Grid
 import XMonad.Layout.ThreeColumns
 import XMonad.StackSet (RationalRect (..))
+import XMonad.Util.ClickableWorkspaces
 import XMonad.Util.Cursor (setDefaultCursor, xC_left_ptr)
-import XMonad.Util.EZConfig
 import XMonad.Util.EZConfig (additionalKeys, additionalKeysP)
 
 myXmobarPP :: PP
 myXmobarPP =
   def
     { ppSep = "|",
-      ppTitle = (\x -> ""),
-      ppLayout = (\x -> ""),
-      ppCurrent = (\x -> "<fc=#000000,#FFFFFF> " ++ x ++ " </fc>"),
-      ppHidden = (\x -> "[" ++ x ++ "]"),
-      ppHiddenNoWindows = (\x -> " " ++ x ++ " "),
+      ppTitle = const "",
+      ppLayout = const "",
+      ppCurrent = \x -> "<fc=#000000,#FFFFFF> " ++ x ++ " </fc>",
+      ppHidden = \x -> "[" ++ x ++ "]",
+      ppHiddenNoWindows = \x -> " " ++ x ++ " ",
       ppWsSep = " "
     }
+
+mySB = statusBarProp "xmobar" (pure myXmobarPP)
 
 myLayout = tiled ||| threeCol ||| mirrorT ||| Grid ||| Full
   where
@@ -52,6 +54,7 @@ myKeys =
     ((0, xF86XK_AudioMute), toggleMute >> return ()),
     ((0, xF86XK_MonBrightnessUp), spawn "light -A 10"),
     ((0, xF86XK_MonBrightnessDown), spawn "light -U 10"),
+    ((0, xF86XK_AudioMicMute), spawn "pactl set-source-mute 0 toggle"),
     ((0, xK_Print), spawn "spectacle")
   ]
 
@@ -93,5 +96,5 @@ main =
   xmonad
     . ewmhFullscreen
     . ewmh
-    . withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) defToggleStrutsKey
+    . withEasySB (statusBarProp "xmobar" (clickablePP myXmobarPP)) defToggleStrutsKey
     $ myConfig
