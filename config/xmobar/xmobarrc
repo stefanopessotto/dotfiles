@@ -78,7 +78,7 @@ Config {
 
         -- time and date indicator 
         --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
-        , Run Date           "<fc=#ABABAB>%F</fc>" "date" 10
+        , Run Date           "<fc=#ABABAB><action=`kitty calcurse` button=1>%F</action></fc>" "date" 10
         , Run Date           "<fc=#ABABAB>%T</fc>" "time" 10
     , Run Volume "default" "Master" [
                  "--template" , "<action=pavucontrol-qt button=1><status>  <volume>%</action>", 
