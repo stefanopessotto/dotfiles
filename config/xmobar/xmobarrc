@@ -11,7 +11,7 @@ Config {
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%UnsafeXMonadLog% %multicpu% @ %multicoretemp% | %memory% | %wlan0wi% @ %dynnetwork% }%time%{ %date% | %bright% | %mic% | %default:Master% | %battery% "
+   , template = "%UnsafeXMonadLog% %multicpu% @ %multicoretemp% | %memory% | %wlan0wi% %dynnetwork% }%time%{ %date% | %bright% | %mic% | %default:Master% | %battery% "
 
    -- general behavior
    , lowerOnStart =     False -- send to bottom of window stack on start
@@ -24,11 +24,11 @@ Config {
 
         -- network activity monitor (dynamic interface resolution)
         [
-        Run Wireless "wlan0" [ "-t", "<qualityipat> <essid>"
+        Run Wireless "wlan0" [ "-t", "<action=`kitty nmtui` button=1><qualityipat> <essid></action>"
                              , "--"
                              , "--quality-icon-pattern", "<icon=wifi/%%.xpm/>"
                              ] 10,
-    	Run DynNetwork     [ "--template" , "<action=`kitty nmtui` button=1><tx>kB/s \xf01da<rx>kB/s \xf0552</action>"
+    	Run DynNetwork     [ "--template" , "@ <tx>kB/s \xf01da<rx>kB/s \xf0552"
                              , "--Low"      , "1000"       -- units: B/s
                              , "--High"     , "5000"       -- units: B/s
                              -- , "--low"      , "darkgreen"

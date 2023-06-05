@@ -1,4 +1,4 @@
-import Graphics.X11.ExtraTypes.XF86 (xF86XK_AudioLowerVolume, xF86XK_AudioMicMute, xF86XK_AudioMute, xF86XK_AudioRaiseVolume, xF86XK_MonBrightnessDown, xF86XK_MonBrightnessUp)
+import Graphics.X11.ExtraTypes.XF86 (xF86XK_AudioLowerVolume, xF86XK_AudioMicMute, xF86XK_AudioMute, xF86XK_AudioRaiseVolume, xF86XK_Display, xF86XK_MonBrightnessDown, xF86XK_MonBrightnessUp)
 import XMonad
 import XMonad.Actions.Volume
 import XMonad.Hooks.EwmhDesktops
@@ -55,7 +55,8 @@ myKeys =
     ((0, xF86XK_MonBrightnessUp), spawn "light -A 5"),
     ((0, xF86XK_MonBrightnessDown), spawn "light -U 5"),
     ((0, xF86XK_AudioMicMute), spawn "pactl set-source-mute 0 toggle"),
-    ((0, xK_Print), spawn "spectacle")
+    ((0, xK_Print), spawn "spectacle"),
+    ((0, xF86XK_Display), spawn "arandr")
   ]
 
 myManageHook =
@@ -66,7 +67,7 @@ myStartupHook :: X ()
 myStartupHook = do
   setDefaultCursor xC_left_ptr
   spawn "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
-  spawn "feh --bg-fill /home/peska/.wallpapers/"
+  spawn "feh --bg-scale --no-fehbg --randomize /home/peska/.wallpapers/*"
   spawn "setxkbmap -option \"caps:swapescape\""
   spawn "xinput set-prop \"ETPS/2 Elantech Touchpad\" \"libinput Tapping Enabled\" 1"
   spawn "xinput set-prop \"ETPS/2 Elantech Touchpad\" \"libinput Tapping Enabled Default\" 1"
