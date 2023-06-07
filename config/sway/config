@@ -92,18 +92,18 @@ input "type:keyboard" {
     bindsym $mod+Shift+f exec $browser
     # Start password manager 
     bindsym $mod+Shift+b exec $passmanager
+    # Spotify
+    bindsym $mod+Shift+s exec spotify
     # Lock
     bindsym $mod+Shift+a exec $lock 
-    # Audio control
-    bindsym $mod+Shift+s exec $audiomgr
     # Webcam
     bindsym $mod+c exec $camera
     # Fans
     bindsym $mod+f exec $fanmgr
     # Power mgr
     bindsym $mod+p exec $pwrmgr
-    # Spotify
-    bindsym $mod+s exec spotify
+    # Audio control
+    bindsym $mod+s exec $audiomgr
 
     # Brightness
     bindsym XF86MonBrightnessDown exec light -U 2 && light -G | cut -d'.' -f1 > $WOBSOCK
@@ -189,9 +189,8 @@ input "type:keyboard" {
     # bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    # bindsym $mod+s layout stacking
-    # bindsym $mod+w layout tabbed
-    # bindsym $mod+e layout toggle split
+    bindsym $mod+Shift+Tab layout toggle split stacking
+    bindsym $mod+Tab focus next
 
     # Make the current focus fullscreen
     bindsym $mod+space fullscreen
