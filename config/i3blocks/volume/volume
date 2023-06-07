@@ -1,0 +1,46 @@
+#!/bin/bash
+# Displays the default device, volume, and mute status for i3blocks
+
+set -a
+
+AUDIO_HIGH_SYMBOL='󰕾 '
+
+AUDIO_MED_THRESH=60
+AUDIO_MED_SYMBOL='󰖀 '
+
+AUDIO_LOW_THRESH=30
+AUDIO_LOW_SYMBOL='󰕿 '
+
+AUDIO_MUTED_SYMBOL=${AUDIO_MUTED_SYMBOL:-'󰖁 '}
+
+SHORT_FORMAT=${SHORT_FORMAT:-'${SYMB} ${VOL}%'}
+
+SUBSCRIBE=${SUBSCRIBE:-0}
+
+function print_format {
+    echo "$1" | envsubst '${SYMB}${VOL}'
+}
+
+function print_block {
+    ACTIVE=$(wpctl get-volume @DEFAULT_SINK@)
+    VOL=$(echo "$ACTIVE" | awk '{print $2*100}')
+    MUTED=$(echo "$ACTIVE" | grep "MUTED")
+
+    if [ -z "$MUTED" ] ; then
+        SYMB=$AUDIO_HIGH_SYMBOL
+        [[ $VOL -le $AUDIO_MED_THRESH ]] && SYMB=$AUDIO_MED_SYMBOL
+        [[ $VOL -le $AUDIO_LOW_THRESH ]] && SYMB=$AUDIO_LOW_SYMBOL
+    else
+        SYMB=$AUDIO_MUTED_SYMBOL
+    fi
+
+    print_format "$SHORT_FORMAT"
+
+}
+
+print_block
+if [[ $SUBSCRIBE == 1 ]] ; then
+    while read -r EVENT; do
+        print_block
+    done < <(pactl subscribe | stdbuf -oL grep change)
+fi

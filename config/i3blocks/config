@@ -1,0 +1,84 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+command=cd $BLOCK_NAME && ./$BLOCK_NAME
+separator_block_width=15
+#markup=none
+
+
+[cpu_usage]
+markup=pango
+interval=persist
+min_width= 100%
+REFRESH_TIME=1
+LABEL=
+WARN_PERCENT=50
+CRIT_PERCENT=80
+DECIMALS=2
+separator=False
+
+[temperature]
+interval=10
+
+[memory]
+instance=MEM
+interval=10
+
+#[iface]
+#IFACE=wlan0
+#interval=4
+#separator=false
+
+[essid]
+interval=20
+separator=false 
+[bandwidth]
+interval=persist
+markup=pango
+UNIT=Kb
+
+[volume]
+interval=2
+separator=false
+
+[miccontrol]
+interval=2
+
+[brightness]
+interval=1
+
+[battery]
+interval=30
+markup=pango
+
+## Date Time
+##
+[time]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=1
+
+[arch-update]
+markup=pango
+QUIET=True
+interval=3600
+MIN_UPDATES=20

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -a
+level=$(light)
+SYMB="󰃠 "
+
+echo "$SYMB $level"
