@@ -17,7 +17,8 @@ set $right l
 set $term kitty
 set $browser firefox
 set $passmanager bitwarden-desktop
-set $lock 'swaylock -f -c 000000'
+set $lock 'swaylock --screenshots --clock --indicator --indicator-radius 100 --effect-blur 7x5 --ring-color bb00cc --key-hl-color 880033 --line-color 00000000 --inside-color 00000088 --separator-color 00000000'
+
 set $audiomgr pavucontrol-qt
 set $camera cameractrlsgtk.py
 set $pwrmgr tlpui
