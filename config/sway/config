@@ -4,6 +4,8 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -68,6 +70,7 @@ exec swayidle -w \
 #
 input "2:14:ETPS/2_Elantech_Touchpad" {
     dwt enabled
+    # dwt disabled
     tap enabled
     middle_emulation enabled
 }
@@ -87,6 +90,10 @@ input "type:keyboard" {
     bindsym $mod+Shift+Return exec $term
     # Kill focused window
     bindsym $mod+Shift+c kill
+    # Hard kill
+    bindsym $mod+Shift+BackSpace exec swaymsg -t get_tree | \
+          jq '.. | select(.type?) | select(.focused==true).pid' | \
+          xargs -L 1 kill -9
     # Start your launcher
     bindsym $mod+Shift+p exec $menu
     # Start browser
