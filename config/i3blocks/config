@@ -55,7 +55,7 @@ separator=false
 [bandwidth]
 interval=persist
 markup=pango
-UNIT=Kb
+UNIT=KB
 
 [volume]
 interval=2
