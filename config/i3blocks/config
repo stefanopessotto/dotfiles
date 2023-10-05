@@ -38,11 +38,11 @@ DECIMALS=2
 separator=False
 
 [temperature]
-interval=10
+interval=3
 
 [memory]
 instance=MEM
-interval=10
+interval=3
 
 #[iface]
 #IFACE=wlan0
@@ -50,7 +50,7 @@ interval=10
 #separator=false
 
 [essid]
-interval=20
+interval=5
 separator=false 
 [bandwidth]
 interval=persist
@@ -58,17 +58,17 @@ markup=pango
 UNIT=KB
 
 [volume]
-interval=2
+interval=1
 separator=false
 
 [miccontrol]
-interval=2
+interval=1
 
 [brightness]
 interval=1
 
 [battery]
-interval=30
+interval=1
 markup=pango
 
 ## Date Time
@@ -80,5 +80,5 @@ interval=1
 [arch-update]
 markup=pango
 QUIET=True
-interval=3600
+interval=30
 MIN_UPDATES=20

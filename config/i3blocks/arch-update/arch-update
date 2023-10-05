@@ -129,7 +129,10 @@ def matching_updates(updates, watch_list):
 label = os.environ.get("LABEL","")
 #MIN_UPDATES to display when at least n updates are available
 MIN_UPDATES = os.environ.get("MIN_UPDATES")
-MIN_UPDATES = if MIN_UPDATES != "" then int(MIN_UPDATES) else 1
+if MIN_UPDATES != None and MIN_UPDATES != "":
+    MIN_UPDATES = int(MIN_UPDATES)
+else:
+    MIN_UPDATES = 1
 #Edited to have an env variable for quiet
 message = "{0}<span color='{1}'>{2}</span>"
 args = create_argparse()
