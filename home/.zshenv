@@ -25,9 +25,5 @@ export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 #slow startup of zsh
 skip_global_compinit=1
 
-#ghidra gray screen
-export _JAVA_AWT_WM_NONREPARENTING=1
-
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib:/usr/local/lib"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/jvm/java-17-openjdk/lib/server"
-
