@@ -26,8 +26,22 @@ export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 export PYTHONPYCACHEPREFIX=$XDG_CACHE_HOME/python
 export ZDOTDIR=$HOME/.config/zsh
 export HISTFILE="$XDG_STATE_HOME"/zsh/history 
-#slow startup of zsh
+# Slow startup of zsh
 skip_global_compinit=1
 
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib:/usr/local/lib"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/jvm/java-17-openjdk/lib/server"
+
+# Fix R studio
+R_HOME_USER="$HOME/.config/R"
+R_PROFILE_USER="$HOME/.config/R/profile"
+R_HISTFILE="$HOME/.config/R/history"
+
+# Fix Docker
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+
+# Fix .Xauthority
+export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+
+# Fix .xinitrc
+export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
