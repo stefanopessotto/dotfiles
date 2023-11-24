@@ -68,12 +68,6 @@ exec swayidle -w \
 #
 # Example configuration:
 #
-input "2:14:ETPS/2_Elantech_Touchpad" {
-    dwt enabled
-    # dwt disabled
-    tap enabled
-    middle_emulation enabled
-}
 input "type:keyboard" {
    xkb_layout it
    xkb_options caps:swapescape
@@ -268,3 +262,4 @@ bar {
 }
 
 include /etc/sway/config.d/*
+include touchpad
