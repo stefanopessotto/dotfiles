@@ -29,7 +29,7 @@ export HISTFILE="$XDG_STATE_HOME"/zsh/history
 # Slow startup of zsh
 skip_global_compinit=1
 
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib:/usr/local/lib"
+export LD_LIBRARY_PATH="/usr/lib:/usr/local/lib"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/jvm/java-17-openjdk/lib/server"
 
 # Fix R studio
