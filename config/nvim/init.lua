@@ -31,7 +31,7 @@ require('lazy').setup({
             -- LSP Support
             { 'neovim/nvim-lspconfig' }, -- Required
             {
-                                 -- Optional
+                -- Optional
                 'williamboman/mason.nvim',
                 build = function()
                     pcall(vim.cmd, 'MasonUpdate')
@@ -40,14 +40,65 @@ require('lazy').setup({
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' }, -- Required
+            { 'hrsh7th/nvim-cmp' },     -- Required
             { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-            { 'L3MON4D3/LuaSnip' }, -- Required
+            { 'L3MON4D3/LuaSnip' },     -- Required
         }
-    }
+    },
     ---
     -- List of plugins...
     ---
+    -- Copilot
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({
+                panel = {
+                    enabled = true,
+                    auto_refresh = true,
+                    keymap = {
+                        jump_prev = "[[",
+                        jump_next = "]]",
+                        accept = "ga",
+                        refresh = "gr",
+                        open = "<M-CR>"
+                    },
+                    layout = {
+                        position = "bottom", -- | top | left | right
+                        ratio = 0.4
+                    },
+                },
+                suggestion = {
+                    enabled = true,
+                    auto_trigger = true,
+                    debounce = 75,
+                    keymap = {
+                        accept = "<M-Tab>",
+                        accept_word = false,
+                        accept_line = false,
+                        next = "<M-+>",
+                        prev = "<M-è>",
+                        dismiss = "<M-]>",
+                    },
+                },
+                filetypes = {
+                    yaml = false,
+                    markdown = true,
+                    help = false,
+                    gitcommit = false,
+                    gitrebase = false,
+                    hgcommit = false,
+                    svn = false,
+                    cvs = false,
+                    ["."] = false,
+                },
+                copilot_node_command = 'node', -- Node.js version must be > 18.x
+                server_opts_overrides = {},
+            })
+        end,
+    }
 })
 
 -- confiugure catppccucin color scheme
@@ -63,26 +114,34 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+require('lspconfig').ltex.setup({
+    settings = {
+        ltex = {
+            -- language = "en",
+            language = "it"
+        }
+    }
+})
 
 lsp.ensure_installed({
     -- Replace these with whatever servers you want to install
-    'clangd',                        -- C
-    'cmake',                         -- cmake
-    'dockerls',                      -- docker
+    'clangd',                          -- C
+    'cmake',                           -- cmake
+    'dockerls',                        -- docker
     'docker_compose_language_service', -- docker-compose
-    'gopls',                         -- go
-    'hls',                           -- haskell
-    'jdtls',                         -- java
-    'tsserver',                      -- javascript
-    'julials',                       -- julia
-    'ltex',                          -- latex
-    'intelephense',                  -- php
-    'pylsp',                         -- python
-    'r_language_server',             -- R
-    'ruby_ls',                       -- ruby
-    'sqlls',                         -- SQL
-    'lemminx',                       -- XML
-    'zls'                            -- ZIG
+    'gopls',                           -- go
+    'hls',                             -- haskell
+    'jdtls',                           -- java
+    'tsserver',                        -- javascript
+    'julials',                         -- julia
+    'ltex',                            -- latex
+    'intelephense',                    -- php
+    'pylsp',                           -- python
+    'r_language_server',               -- R
+    'ruby_ls',                         -- ruby
+    'sqlls',                           -- SQL
+    'lemminx',                         -- XML
+    'zls'                              -- ZIG
 })
 
 lsp.setup()
