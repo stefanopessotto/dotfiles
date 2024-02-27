@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -a
-level=$(light)
+level=$(brillo | cut -d '.' -f 1)
 SYMB="󰃠 "
 
 echo "$SYMB $level"
