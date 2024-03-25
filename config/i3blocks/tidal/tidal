@@ -1,0 +1,11 @@
+#!/bin/bash
+
+JSON=$(curl -sL http://localhost:47836/current)
+STATUS=$(echo $JSON | jq -r '.status')
+if [ "$STATUS" != "playing" ]; then
+    exit
+fi
+TITLE=$(echo $JSON | jq -r '.title')
+ARTIST=$(echo $JSON | jq -r '.artist')
+
+echo "$ARTIST - $TITLE"
