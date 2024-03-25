@@ -23,6 +23,7 @@ set $bluetooth blueman-manager
 set $lock 'swaylock --screenshots --clock --indicator --indicator-radius 100 --effect-blur 7x5 --ring-color bb00cc --key-hl-color 880033 --line-color 00000000 --inside-color 00000088 --separator-color 00000000'
 
 set $audiomgr pavucontrol-qt
+set $hotspot wihotspot
 set $camera cameractrlsgtk.py
 set $pwrmgr tlpui
 set $fanmgr thinkfan-ui
@@ -110,6 +111,8 @@ input "type:keyboard" {
     bindsym $mod+p exec $pwrmgr
     # Audio control
     bindsym $mod+s exec $audiomgr
+    # Hotspot 
+    bindsym $mod+n exec $hotspot
 
     # Brightness
     bindsym XF86MonBrightnessDown exec brillo -U 2 && brillo -G | cut -d'.' -f1 > $WOBSOCK
@@ -122,6 +125,7 @@ input "type:keyboard" {
     bindsym xF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
     bindsym xF86Display exec wdisplays
     bindsym Print exec $screenshots
+    bindsym $mod+0 output "eDP-1" toggle
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -266,3 +270,5 @@ bar {
 }
 
 include /etc/sway/config.d/*
+include pointer
+include touchpad
