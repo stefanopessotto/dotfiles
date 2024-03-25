@@ -90,3 +90,6 @@ docker-connect () {
         echo "Usage: $0 container-name"
     fi
 }
+
+# Fix QT platform apps
+export QT_QPA_PLATFORM=xcb
