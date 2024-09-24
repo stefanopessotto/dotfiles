@@ -83,5 +83,5 @@ interval=1
 [arch-update]
 markup=pango
 QUIET=True
-interval=30
+interval=60
 MIN_UPDATES=20

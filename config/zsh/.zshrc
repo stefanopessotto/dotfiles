@@ -93,3 +93,4 @@ docker-connect () {
 
 # Fix QT platform apps
 export QT_QPA_PLATFORM=xcb
+

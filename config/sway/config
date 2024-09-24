@@ -5,6 +5,7 @@
 # Read `man 5 sway` for a complete reference.
 
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec_always autotiling -w 1 3 5 7 9
 
 ### Variables
 #
@@ -24,7 +25,7 @@ set $lock 'swaylock --screenshots --clock --indicator --indicator-radius 100 --e
 
 set $audiomgr pavucontrol-qt
 set $hotspot wihotspot
-set $camera cameractrlsgtk.py
+set $camera cameractrlsgtk4
 set $pwrmgr tlpui
 set $fanmgr thinkfan-ui
 set $screenshots 'grim -g "$(slurp)" $HOME/pictures/$(date +"%s_grim.png")'
@@ -79,6 +80,9 @@ input "type:keyboard" {
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
+# Start fcitx5
+exec fcitx5 -d -r
+
 ### Key bindings
 #
 # Basics:
@@ -119,13 +123,13 @@ input "type:keyboard" {
     bindsym XF86MonBrightnessUp exec brillo -A 2 && brillo -G | cut -d'.' -f1 > $WOBSOCK
 
     # Sound
-    bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && wpctl get-volume @DEFAULT_SINK@ | cut -d' ' -f2 | awk '{print substr($1, 3, length($1)-1)}' > $WOBSOCK
-    bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && wpctl get-volume @DEFAULT_SINK@ | cut -d' ' -f2 | awk '{print substr($1, 3, length($1)-1)}' > $WOBSOCK
+    bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && wpctl get-volume @DEFAULT_SINK@ | cut -d' ' -f2 | awk '{print $1 * 100/150}' > $WOBSOCK
+    bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && wpctl get-volume @DEFAULT_SINK@ | cut -d' ' -f2 | awk '{print $1 * 100/150}' > $WOBSOCK
     bindsym xF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
     bindsym xF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
     bindsym xF86Display exec wdisplays
     bindsym Print exec $screenshots
-    bindsym $mod+0 output "eDP-1" toggle
+    bindsym --locked $mod+0 output "eDP-1" toggle
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -199,7 +203,8 @@ input "type:keyboard" {
     # bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+Shift+Tab layout toggle split stacking
+    bindsym $mod+Escape layout toggle split stacking
+    bindsym $mod+Shift+Tab focus prev
     bindsym $mod+Tab focus next
 
     # Make the current focus fullscreen
