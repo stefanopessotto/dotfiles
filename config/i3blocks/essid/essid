@@ -32,5 +32,11 @@ ESSID=$(/sbin/iwconfig $INTERFACE | perl -n -e'/ESSID:"(.*?)"/ && print $1')
 
 #------------------------------------------------------------------------
 
-echo $ESSID # full text
-echo $ESSID # short text
+vpn=""
+wg="$(nmcli c show --active | grep wireguard | wc -l)"
+if [ "$wg" -ge 1 ]; then
+    vpn=""
+fi
+
+echo "$vpn $ESSID" # full text
+# echo $ESSID # short text

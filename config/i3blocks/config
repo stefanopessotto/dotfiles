@@ -52,6 +52,7 @@ interval=3
 [essid]
 interval=5
 separator=false 
+
 [bandwidth]
 interval=persist
 markup=pango
