@@ -1,7 +1,7 @@
 input "2:14:ETPS/2_Elantech_Touchpad" {
   events enabled
   accel_profile flat
-  pointer_accel 0.8
+  pointer_accel 0.7
   natural_scroll disabled
   scroll_factor 1.0
   scroll_method two_finger

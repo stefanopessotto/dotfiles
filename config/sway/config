@@ -17,16 +17,18 @@ set $down j
 set $up k
 set $right l
 
-set $term kitty
+set $term kitty --single-instance
 set $browser firefox
 set $passmanager bitwarden-desktop
 set $bluetooth blueman-manager
 set $lock 'swaylock --screenshots --clock --indicator --indicator-radius 100 --effect-blur 7x5 --ring-color bb00cc --key-hl-color 880033 --line-color 00000000 --inside-color 00000088 --separator-color 00000000'
+set $vpn_toggle '[ -z "$(nmcli -f active connection show "$VPN_NAME")" ] && nmcli conn up $VPN_NAME || nmcli conn down $VPN_NAME'
 
 set $audiomgr pavucontrol-qt
 set $hotspot wihotspot
 set $camera cameractrlsgtk4
 set $pwrmgr tlpui
+
 set $fanmgr thinkfan-ui
 set $screenshots 'grim -g "$(slurp)" $HOME/pictures/$(date +"%s_grim.png")'
 set $player tidal-hifi
@@ -51,9 +53,25 @@ output * bg "$HOME/.wallpapers/pikachu.png" fill
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-    output eDP-1 {
-    mode 1920x1080@60.05Hz
+output HDMI-A-1 {
+    mode 1920x1080@144Hz
+    transform 90
+    pos 0 0
 }
+output eDP-1 {
+    mode 1920x1080@60.05Hz
+    pos 1080 840
+}
+
+workspace 1 output eDP-1
+workspace 2 output eDP-1
+workspace 3 output eDP-1
+workspace 4 output eDP-1
+workspace 5 output eDP-1
+workspace 6 output HDMI-A-1
+workspace 7 output HDMI-A-1
+workspace 8 output HDMI-A-1
+workspace 9 output HDMI-A-1
 
 ### Idle configuration
 #
@@ -81,7 +99,7 @@ input "type:keyboard" {
 # Read `man 5 sway-input` for more information about this section.
 
 # Start fcitx5
-exec fcitx5 -d -r
+exec --no-startup-id fcitx5 -d
 
 ### Key bindings
 #
@@ -130,6 +148,7 @@ exec fcitx5 -d -r
     bindsym xF86Display exec wdisplays
     bindsym Print exec $screenshots
     bindsym --locked $mod+0 output "eDP-1" toggle
+    bindsym XF86Favorites exec $vpn_toggle
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -211,7 +230,7 @@ exec fcitx5 -d -r
     bindsym $mod+space fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    # bindsym $mod+Shift+space floating toggle
+    bindsym $mod+Shift+space floating toggle
 
     # Swap focus between the tiling area and the floating area
     # bindsym $mod+space focus mode_toggle
@@ -255,6 +274,7 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+#bindsym $mod+Shift+Escape exec swaymsg input type:keyboard xkb_switch_layout next
 
 #
 # Status Bar:
@@ -275,5 +295,4 @@ bar {
 }
 
 include /etc/sway/config.d/*
-include pointer
 include touchpad

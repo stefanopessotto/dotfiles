@@ -40,30 +40,14 @@ else
 fi
 
 source "$CARGO_HOME/env"
-source "/home/peska/.local/share/ghcup/env" # ghcup-env
+source "$HOME/.local/share/ghcup/env" # ghcup-env
 
 alias ls='ls --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias printer="systemctl start cups.service"
-alias rm="trash"
 alias vim="nvim"
-alias pwninit='pwninit --template-path ~/.config/pwninit-template.py --template-bin-name e'
-
-alias cyberchef='xdg-open /usr/share/webapps/cyberchef/index.html'
-
-alias python="python3"
-alias pluto="julia -e \"import Pluto; Pluto.run()\""
-
-alias morning="wol f0:79:59:8e:46:2f"
-
-alias csync="calcurse-caldav"
-
-### PWN ###
-alias disable_slr="setarch $(uname -m) -R $SHELL"
-alias pwninit="pwninit --template-path ~/.config/pwninit/template.py"
 
 [[ -s /home/peska/.autojump/etc/profile.d/autojump.sh ]] && source /home/peska/.autojump/etc/profile.d/autojump.sh &
 autoload -U compinit && compinit -u
@@ -72,7 +56,6 @@ autoload -U compinit && compinit -u
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval $(thefuck --alias)
-
 
 # Load Angular CLI autocompletion.
 #source <(ng completion script)
@@ -93,4 +76,7 @@ docker-connect () {
 
 # Fix QT platform apps
 export QT_QPA_PLATFORM=xcb
+
+# VPN name for sway
+export VPN_NAME="homelab"
 
