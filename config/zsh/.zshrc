@@ -77,6 +77,4 @@ docker-connect () {
 # Fix QT platform apps
 export QT_QPA_PLATFORM=xcb
 
-# VPN name for sway
-export VPN_NAME="homelab"
 
